@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            max-width: 1000px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .left {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .left img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .right {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h2 {
+            color: #333;
+            margin: 20px 0;
+            text-align: center;
+        }
+        h3 {
+            color: #007bff;
+            text-align: center;
+        }
+        select, input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff; /* Set background color to white */
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <!-- Add your images here if necessary -->
+            <img src="{{ url_for('static', filename='img9.png') }}" alt="Input Image 9">
+            <img src="{{ url_for('static', filename='img7.png') }}" alt="Input Image 7">
+            <img src="{{ url_for('static', filename='img_1.png') }}" alt="Input Image 6">
+            <img src="{{ url_for('static', filename='img_3.png') }}" alt="Input Image 11">
+            <img src="{{ url_for('static', filename='img.png') }}" alt="Input Image 8">
+            <img src="{{ url_for('static', filename='img_2.png') }}" alt="Input Image 10">
+        </div>
+        <div class="right">
+            <h2>Mobile Price Prediction</h2>
+            {% if predicted_price %}
+                <h3>Predicted Price: ${{ predicted_price }}</h3>
+            {% else %}
+                <form action="/predict" method="post">
+                    <label for="ab">abc:</label>
+                    <select name="ab" id="ab">
+                        {% for value in ppi %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+                    <label for="cd">cdi:</label>
+                    <select name="cd" id="cd">
+                        {% for value in ppi %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+                    <label for="ppi">PPI:</label>
+                    <select name="ppi" id="ppi">
+                        {% for value in ppi %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="cpu_core">CPU Core:</label>
+                    <select name="cpu_core" id="cpu_core">
+                        {% for value in cpu_core %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="cpu_freq">CPU Frequency:</label>
+                    <select name="cpu_freq" id="cpu_freq">
+                        {% for value in cpu_freq %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="internal_mem">Internal Memory:</label>
+                    <select name="internal_mem" id="internal_mem">
+                        {% for value in internal_mem %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="ram">RAM:</label>
+                    <select name="ram" id="ram">
+                        {% for value in ram %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="rear_cam">Rear Camera:</label>
+                    <select name="rear_cam" id="rear_cam">
+                        {% for value in rear_cam %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="front_cam">Front Camera:</label>
+                    <select name="front_cam" id="front_cam">
+                        {% for value in front_cam %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="battery">Battery:</label>
+                    <select name="battery" id="battery">
+                        {% for value in battery %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="thickness">Thickness:</label>
+                    <select name="thickness" id="thickness">
+                        {% for value in thickness %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="weight">Weight:</label>
+                    <select name="weight" id="weight">
+                        {% for value in weight %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="resolution">Resolution:</label>
+                    <select name="resolution" id="resolution">
+                        {% for value in resolution %}
+                            <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select><br>
+                    <!-- Add other input fields here -->
+                    <input type="submit" value="Predict">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
